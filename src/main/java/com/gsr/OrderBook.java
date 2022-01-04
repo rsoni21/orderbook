@@ -36,11 +36,11 @@ public class OrderBook {
         buyOrders.addAll(bids);
     }
 
-    void updateOrderBook(OrderUpdate trade){
-        if(trade.getSide().equals(BUY))
-            buyOrders.add(new OrderItem(trade.getPrice(), trade.getSize()));
+    void updateOrderBook(OrderUpdate orderUpdate){
+        if((BUY).equals(orderUpdate.getSide()))
+            buyOrders.add(new OrderItem(orderUpdate.getPrice(), orderUpdate.getSize()));
         else
-            sellOrders.add(new OrderItem(trade.getPrice(), trade.getSize()));
+            sellOrders.add(new OrderItem(orderUpdate.getPrice(), orderUpdate.getSize()));
 
         removeZeroSizeOrders(buyOrders, sellOrders);
 
@@ -50,7 +50,6 @@ public class OrderBook {
             buyOrders.peek().setSize(buyOrders.peek().getSize().subtract(diff));
             removeZeroSizeOrders(buyOrders, sellOrders);
         }
-
     }
 
     private void removeZeroSizeOrders(PriorityQueue<OrderItem> buyOrders, PriorityQueue<OrderItem> sellOrders) {

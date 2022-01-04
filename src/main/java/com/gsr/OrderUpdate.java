@@ -2,22 +2,20 @@ package com.gsr;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class OrderUpdate {
+public class OrderUpdate extends OrderItem{
     String side;
-    BigDecimal price;
-    BigDecimal size;
 
     @JsonCreator
     public OrderUpdate(List<String> orders){
+        super(new ArrayList<>(Arrays.asList(orders.get(1), orders.get(2))));
         if(orders==null || orders.size() < 3){
             throw new IllegalArgumentException("Changes from API in incorrect format. Check connection");
         }
         side = orders.get(0);
-        price = new BigDecimal(orders.get(1));
-        size = new BigDecimal(orders.get(2));
     }
 
     public String getSide() {
@@ -28,19 +26,4 @@ public class OrderUpdate {
         this.side = side;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getSize() {
-        return size;
-    }
-
-    public void setSize(BigDecimal size) {
-        this.size = size;
-    }
 }

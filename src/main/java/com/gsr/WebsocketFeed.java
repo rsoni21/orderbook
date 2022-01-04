@@ -11,11 +11,13 @@ import java.net.URI;
 public class WebsocketFeed extends WebSocketClient{
 
     private final String productId;
+    static ResponseHandler responseHandler;
 
     public WebsocketFeed(String websocketUrl,
                          String productId) {
         super(URI.create(websocketUrl));
         this.productId = productId;
+        responseHandler = new ResponseHandler();
     }
 
     @Override
@@ -39,8 +41,7 @@ public class WebsocketFeed extends WebSocketClient{
 
     @Override
     public void onMessage(String message) {
-        ResponseProcessor responseProcessor = new ResponseProcessor();
-        responseProcessor.processMessage(message);
+        responseHandler.process(message);
     }
 
     public void subscribe(String msg) {

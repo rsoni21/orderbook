@@ -12,6 +12,8 @@ public class OrderMessage {
     private String type;
     private String product_id;
     private Timestamp time;
+    private String message;
+    private String reason;
     List<OrderItem> bids;
     List<OrderItem> asks;
     List<OrderUpdate> changes;
@@ -64,7 +66,21 @@ public class OrderMessage {
         this.changes = changes;
     }
 
+    public String getMessage() {
+        return message;
+    }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 }
 
 
